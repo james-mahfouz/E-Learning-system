@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "./index.css"
+import logo from "../../images/logo.png";
+
 
 // import "../MySignup/index.css"
 
@@ -10,47 +12,48 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     // const navigate = useNavigate();
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    //     const data = new FormData()
-    //     data.append('email', email)
-    //     data.append('password', password)
+        const data = new FormData()
+        data.append('email', email)
+        data.append('password', password)
+        console.log(data, email, password)
 
-    //     try {
-    //         const response = await axios.post('http://localhost:8000/api/v1/auth/login', data);
-    //         if(response.data.status === "success"){
-    //             localStorage.setItem('token', response.data.authorisation.token);
-    //             navigate("/landing")
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+        //     try {
+        //         const response = await axios.post('http://localhost:8000/api/v1/auth/login', data);
+        //         if(response.data.status === "success"){
+        //             localStorage.setItem('token', response.data.authorisation.token);
+        //             navigate("/landing")
+        //         }
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+    };
 
     return (
-        <div class="signin-wrapper">
-            <div class="signin-logo">
-                <img src="images/logo.png" alt=""></img>
+        <div className="signin-wrapper">
+            <div className="signin-logo">
+                <img src={logo} alt=""></img>
             </div>
-            <div class="wrapper">
-                <div class="title">
+            <div className="wrapper">
+                <div className="title">
                     <h2>Sign-In</h2>
                 </div>
 
-                <div class="form">
-                    <div class="inputfield">
+                <div className="form">
+                    <div className="inputfield">
                         <label>Email Address</label>
-                        <input type="text" class="register_input" id="e_mail"></input>
+                        <input type="email" className="register_input" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     </div>
 
-                    <div class="inputfield">
+                    <div className="inputfield">
                         <label>Password</label>
-                        <input type="password" class="register_input" id="pass_code"></input>
+                        <input type="password" className="register_input" value={password} onChange={(e) => setPassword(e.target.value)}></input>
                     </div>
-                    <p>don't have an account? <a href="register.html">Sign-Up</a></p>
-                    <div class="inputfield">
-                        <input type="submit" value="login" class="btn" id="signin_btn"></input>
+                    <p>don't have an account? <a href="/register">Sign-Up</a></p>
+                    <div className="inputfield">
+                        <input type="submit" value="login" className="btn" onClick={handleSubmit}></input>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,1 @@
+{"scripts":{"test":"echo \"Error: no test specified\" && exit 1","start":"node index.js"},"version":"1.0.0","author":"James mahfouz","description":"","license":"ISC","repository":{"type":"git","url":""},"dependencies":{"cors":"^2.8.5","dotenv":"^16.0.3","express":"^4.18.2"}}

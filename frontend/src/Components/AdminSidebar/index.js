@@ -39,9 +39,9 @@ function AdminSidebar() {
                 <a className="close-button" onClick={handleToggleSidebar}> &times; </a>
                 <img src={logo} alt="logo" className="logo"></img>
                 <ul>
-                    <li><Link to="/admin/add-classes">Add Classes</Link></li>
-
                     <li><Link to="/admin/list-students">List Students</Link></li>
+
+                    <li><Link to="/admin/add-classes">Add Classes</Link></li>
 
                     <li><Link to="/admin/upload-files">Upload Files</Link></li>
 

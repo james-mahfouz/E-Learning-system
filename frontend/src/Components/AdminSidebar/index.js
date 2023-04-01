@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Link, Routes } from "react-router-dom";
 import AddClasses from "../AddClasses";
 import ListStudents from "../ListStudents";
 import UploadFiles from "../UploadFiles";
 import WithdrawalForms from "../WithdrawalForms";
+import logo from "../../images/logo.png";
 import "./index.css";
 
 function AdminSidebar() {
@@ -11,7 +12,11 @@ function AdminSidebar() {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     const handleToggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
+        if (screenWidth < 768) {
+            setIsSidebarOpen(!isSidebarOpen);
+        } else {
+            setIsSidebarOpen(true);
+        }
     };
 
     useEffect(() => {
@@ -20,31 +25,27 @@ function AdminSidebar() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    function()
-    if (window.innerWidth < 768) {
-        // The screen is smaller than 768 pixels wide
-    } else {
-        // The screen is larger than or equal to 768 pixels wide
-    }
+    // function()
+    // if (window.innerWidth < 768) {
+    //     // The screen is smaller than 768 pixels wide
+    // } else {
+    //     // The screen is larger than or equal to 768 pixels wide
+    // }
 
 
     return (
-        <div className="admin-panel">
-            <div className="sidebar" style={{ width: isSidebarOpen ? "250px" : "0" }}>
+        <div className="admin-sidebar">
+            <div className="sidebar" style={{ width: (isSidebarOpen || screenWidth >= 768) ? "250px" : "0" }}>
                 <a className="close-button" onClick={handleToggleSidebar}> &times; </a>
+                <img src={logo} alt="logo" className="logo"></img>
                 <ul>
-                    <li>
-                        <Link to="/admin/add-classes">Add Classes</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/list-students">List Students</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/upload-files">Upload Files</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/withdrawal-forms">Withdrawal Forms</Link>
-                    </li>
+                    <li><Link to="/admin/add-classes">Add Classes</Link></li>
+
+                    <li><Link to="/admin/list-students">List Students</Link></li>
+
+                    <li><Link to="/admin/upload-files">Upload Files</Link></li>
+
+                    <li><Link to="/admin/withdrawal-forms">Withdrawal Forms</Link></li>
                 </ul>
             </div>
             <div className="main-content">

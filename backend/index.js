@@ -6,6 +6,9 @@ require("dotenv").config();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+const authRouter = require("./routes/auth.routes")
+app.use('/auth', authRouter)
+
 if (cluster.isMaster) {
     const numCpus = OS.cpus().length;
     for (let i = 0; i < numCpus; i++) {

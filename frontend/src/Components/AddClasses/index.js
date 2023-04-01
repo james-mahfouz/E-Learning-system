@@ -1,6 +1,8 @@
+import AdminSidebar from "../AdminSidebar"
+
 const AddClasses = () => {
     return (
-        <div>add classes</div>
+        <AdminSidebar />
     )
 }
 

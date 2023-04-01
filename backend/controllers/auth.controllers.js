@@ -8,7 +8,6 @@ exports.register = async (req, res) => {
 
     if (existingUser) return res.status(409).json({ message: "Email already exists" })
 
-
     const user = new User();
     if (role) user.role = role;
     user.name = name;
@@ -17,7 +16,23 @@ exports.register = async (req, res) => {
 
     await user.save();
     const { password: hashedPassword, ...newUser } = user.toJSON()
-    res.status(201).json(newUser)
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET_KEY)
+    res.status(201).json({ "user": newUser, "token": token })
+}
+
+exports.login = async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email })
+
+    if (!user) return res.status(404).json({ message: "invalid Credentials" })
+
+    const isMatched = user.matchPassword(password)
+    if (!isMatched) return res.status(404).json({ message: "Invalid Credentials" })
+
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET_KEY)
+
+    const { password: hashedPassword, ...newUser } = user.toJSON()
+    res.json({ "token": token, "user": newUser })
 }
 
 

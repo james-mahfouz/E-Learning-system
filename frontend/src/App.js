@@ -4,12 +4,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import LoginPage from './Pages/LoginPage';
 import RegisterPage from './Pages/RegisterPage';
+import AdminPage from './Pages/AdminPage';
+
 
 function App() {
   return (
     <Router >
       <div className="body">
         <Routes>
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={() => <div>404</div>} />

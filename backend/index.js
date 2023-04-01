@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 const authRouter = require("./routes/auth.routes")
 app.use('/auth', authRouter)
 
-const userRouter = require(".routes/user.routes")
+const userRouter = require("./routes/user.routes")
 const { authMiddleware } = require("./middlewares/auth.middleware");
 app.use('/user', authMiddleware, userRouter)
 

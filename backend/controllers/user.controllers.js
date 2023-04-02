@@ -6,6 +6,13 @@ exports.enroll = async (req, res) => {
         const courseId = req.params.courseId;
         const userId = req.user._id
 
+        const user_check = await User.findById(userId);
+        if (user_check.courses.includes(courseId)) {
+            return res.status(400).json({
+                message: `User ${userId} is already enrolled in course ${courseId}`,
+            });
+        }
+
         const course = await Course.findByIdAndUpdate(courseId, {
             $push: { students: userId }
         })

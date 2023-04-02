@@ -1,6 +1,6 @@
 const ListStudents = () => {
     return (
-        <div>Hello</div>
+        <div>ListStudents</div>
     )
 }
 

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Route, Link, Routes } from "react-router-dom";
 
 import logo from "../../images/logo.png";
 import "../AdminSidebar/index.css";
-import EnrollClasses from "../EnrollClasses"
-import ViewFiles from "../ViewFiles"
+import AddClasses from "../AddClasses"
+import ListStudents from "../ListStudents"
+import UploadFiles from "../UploadFiles"
 
 const AdminSidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const [selectedoption, setSelectedOption] = useState(<ViewFiles />);
+    const [selectedoption, setSelectedOption] = useState(<AddClasses />);
 
     const handleToggleSidebar = () => {
         if (screenWidth < 768) {
@@ -27,9 +27,11 @@ const AdminSidebar = () => {
 
     const handleOptions = (option) => {
         if (option === 1) {
-            setSelectedOption(<EnrollClasses />)
+            setSelectedOption(<AddClasses />)
         } else if (option === 2) {
-            setSelectedOption(<ViewFiles />)
+            setSelectedOption(<ListStudents />)
+        } else if (option === 3) {
+            setSelectedOption(<UploadFiles />)
         }
     }
 
@@ -40,11 +42,13 @@ const AdminSidebar = () => {
                 <a className="close-button" onClick={handleToggleSidebar}> &times; </a>
                 <img src={logo} alt="logo" className="logo"></img>
                 <ul className="admin_option">
-                    <li onClick={() => { handleOptions(1) }}>Enroll in class</li>
+                    <li onClick={() => { handleOptions(1) }}>Add class</li>
 
-                    <li onClick={() => { handleOptions(2) }}>View Files</li>
+                    <li onClick={() => { handleOptions(2) }}>List ListStudents</li>
 
-                    <li>Apply for Withdrawal</li>
+                    <li onClick={() => { handleOptions(3) }}>Upload Files</li>
+
+                    <li onClick={() => { handleOptions(4) }}>see Withdrawal</li>
                 </ul>
             </div>
             <div className="main-content">

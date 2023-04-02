@@ -2,7 +2,7 @@ import AdminSidebar from "../AdminSidebar"
 
 const AddClasses = () => {
     return (
-        <AdminSidebar />
+        <div>Add Classes</div>
     )
 }
 

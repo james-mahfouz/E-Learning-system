@@ -30,7 +30,6 @@ const UploadFiles = () => {
         <div className="card">
             <FileUpload
                 name="demo[]"
-
                 customUpload={true}
                 uploadHandler={onUpload}
                 // disabled={true}

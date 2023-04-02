@@ -5,6 +5,7 @@ import logo from "../../images/logo.png";
 import "../AdminSidebar/index.css";
 import EnrollClasses from "../EnrollClasses"
 import ViewFiles from "../ViewFiles"
+import WithdrawalForm from "../WithdrawalForm"
 
 const UserSidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -30,6 +31,8 @@ const UserSidebar = () => {
             setSelectedOption(<EnrollClasses />)
         } else if (option === 2) {
             setSelectedOption(<ViewFiles />)
+        } else if (option === 3) {
+            setSelectedOption(<WithdrawalForm />)
         }
     }
 
@@ -44,7 +47,7 @@ const UserSidebar = () => {
 
                     <li onClick={() => { handleOptions(2) }}>View Files</li>
 
-                    <li>Apply for Withdrawal</li>
+                    <li onClick={() => { handleOptions(3) }}>Apply for Withdrawal</li>
                 </ul>
             </div>
             <div className="main-content">

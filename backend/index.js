@@ -5,6 +5,8 @@ const app = express()
 require("dotenv").config();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+const path = require('path');
+app.use('/public', express.static(path.join(__dirname, 'uploads')));
 
 const authRouter = require("./routes/auth.routes")
 app.use('/auth', authRouter)

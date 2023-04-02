@@ -41,7 +41,7 @@ exports.upload_file = async (req, res) => {
 
         try {
             await file.save();
-            res.status(201).send(file);
+            res.status(201).json(file);
         } catch (err) {
             // Handle error
         }

@@ -1,3 +1,3 @@
-exports.get_users = () => {
+exports.enroll = () => {
     console.log('hello world')
 }

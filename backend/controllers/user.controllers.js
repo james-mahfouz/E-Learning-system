@@ -1,5 +1,6 @@
 const Course = require("../models/courseModel")
 const User = require("../models/userModel")
+const File = require("../models/fileModel")
 
 exports.enroll = async (req, res) => {
     try {
@@ -30,6 +31,11 @@ exports.enroll = async (req, res) => {
     }
 }
 
-exports.get_files = (req, res) => {
-    console.log("hello world")
-}
+exports.get_files = async (req, res) => {
+    try {
+        const files = await File.find();
+        res.status(200).json({ data: files });
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+};

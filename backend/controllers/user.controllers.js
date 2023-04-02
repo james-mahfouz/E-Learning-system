@@ -63,12 +63,12 @@ exports.get_enrolled_courses = async (req, res) => {
 
 exports.addWithdrawalForm = async (req, res) => {
     const courseId = req.params.courseId
-    const userId = req.params.userId
-
+    const userId = req.user._id
+    console.log(userId)
     try {
         const withdrawal = new Withdrawal({
             course: courseId,
-            userId: userId,
+            user: userId,
         })
 
         await withdrawal.save()

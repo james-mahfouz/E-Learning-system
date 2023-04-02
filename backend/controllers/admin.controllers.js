@@ -1,4 +1,5 @@
 const Course = require("../models/courseModel")
+const File = require("../models/fileModel")
 
 exports.createCourse = async (req, res) => {
     const { name } = req.body
@@ -25,3 +26,14 @@ exports.get_users_courses = async (req, res) => {
         res.status(500).json({ error: e.message })
     }
 }
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({ storage: storage });

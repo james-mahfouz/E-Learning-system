@@ -5,9 +5,6 @@ import "./index.css"
 import logo from "../../images/logo.png";
 
 
-// import "../MySignup/index.css"
-
-
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,11 +12,6 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // const data = new FormData()
-        // data.append('email', email)
-        // data.append('password', password)
-        // console.log(email, password)
 
         try {
             const response = await axios.post('http://localhost:4000/auth/login', {

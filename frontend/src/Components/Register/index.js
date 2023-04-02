@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import SignupButton2 from "../Buttons/SignupButton2";
-// import Logo from "../../images/logo.png";
 import "../Login/index.css";
 import logo from "../../images/logo.png";
 
@@ -11,27 +9,25 @@ function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         console.log(name, email, password)
-        const data = new FormData()
-        data.append('name', name)
-        data.append('email', email)
-        data.append('password', password)
+        const data = {
+            "name": name,
+            "email": email,
+            "password": password
+        }
 
-        //     try {
-        //     const response = await axios.post('http://localhost:8000/api/v1/auth/signup', data);
-        //     if(response.data.status === "success"){
-        //         localStorage.setItem('token', response.data.authorisation.token);
-        //         navigate("/landing")
-        //     }
-        //     } catch (error) {
-        //     console.log(error);
-        //     alert('Signup failed. Please try again.');
-        //     }
+        try {
+            const response = await axios.post('http://localhost:4000/auth/register', data);
+            localStorage.setItem('token', response.data.token);
+            navigate("/user")
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

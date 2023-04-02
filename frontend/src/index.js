@@ -6,7 +6,13 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <div>
+
+        <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/themes/saga-blue/theme.css" />
+        <link rel="stylesheet" href="https://unpkg.com/primereact/resources/primereact.css" />
+        <App />
+    </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

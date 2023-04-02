@@ -4,7 +4,7 @@ const User = require("../models/userModel")
 exports.enroll = async (req, res) => {
     try {
         const courseId = req.params.courseId;
-        const userId = req.body._id
+        const userId = req.user._id
 
         const course = await Course.findByIdAndUpdate(courseId, {
             $push: { students: userId }

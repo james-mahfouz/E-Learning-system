@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 const EnrollClasses = () => {
     const [courses, setCourses] = useState([]);
-    const [error, setError] = useState('');
 
     useEffect(() => {
         const getCourses = async () => {
@@ -13,7 +12,7 @@ const EnrollClasses = () => {
                 });
                 setCourses(response.data.data);
             } catch (e) {
-                setError(e.message);
+                console.log(e.message);
             }
         };
         getCourses();
@@ -28,7 +27,7 @@ const EnrollClasses = () => {
             });
             console.log(response)
         } catch (e) {
-            setError(e.message);
+            console.log(e.message);
         }
     };
 

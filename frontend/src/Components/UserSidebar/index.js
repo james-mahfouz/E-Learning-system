@@ -4,11 +4,12 @@ import { Route, Link, Routes } from "react-router-dom";
 import logo from "../../images/logo.png";
 import "../AdminSidebar/index.css";
 import EnrollClasses from "../EnrollClasses"
+import ViewFiles from "../ViewFiles"
 
 const UserSidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const [selectedoption, setSelctedOption] = useState(<EnrollClasses />);
+    const [selectedoption, setSelectedOption] = useState(<ViewFiles />);
 
     const handleToggleSidebar = () => {
         if (screenWidth < 768) {
@@ -24,11 +25,13 @@ const UserSidebar = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // const handleOptions = (option) => {
-    //     if (option == 1) {
-
-    //     }
-    // }
+    const handleOptions = (option) => {
+        if (option === 1) {
+            setSelectedOption(<EnrollClasses />)
+        } else if (option === 2) {
+            setSelectedOption(<ViewFiles />)
+        }
+    }
 
 
     return (
@@ -37,9 +40,9 @@ const UserSidebar = () => {
                 <a className="close-button" onClick={handleToggleSidebar}> &times; </a>
                 <img src={logo} alt="logo" className="logo"></img>
                 <ul className="admin_option">
-                    <li>Enroll in class</li>
+                    <li onClick={() => { handleOptions(1) }}>Enroll in class</li>
 
-                    <li>View Files</li>
+                    <li onClick={() => { handleOptions(2) }}>View Files</li>
 
                     <li>Apply for Withdrawal</li>
                 </ul>

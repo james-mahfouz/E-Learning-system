@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Route, Link, Routes } from "react-router-dom";
-// import AddClasses from "../AddClasses";
-import ListStudents from "../ListStudents";
-// import UploadFiles from "../UploadFiles";
-// import WithdrawalForms from "../WithdrawalForms";
+
 import logo from "../../images/logo.png";
-import "./index.css";
+import "../AdminSidebar/index.css";
+import EnrollClasses from "../EnrollClasses"
+import ViewFiles from "../ViewFiles"
 
 const AdminSidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [selectedoption, setSelectedOption] = useState(<ViewFiles />);
 
     const handleToggleSidebar = () => {
         if (screenWidth < 768) {
@@ -25,6 +25,14 @@ const AdminSidebar = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    const handleOptions = (option) => {
+        if (option === 1) {
+            setSelectedOption(<EnrollClasses />)
+        } else if (option === 2) {
+            setSelectedOption(<ViewFiles />)
+        }
+    }
+
 
     return (
         <div className="admin-sidebar">
@@ -32,22 +40,19 @@ const AdminSidebar = () => {
                 <a className="close-button" onClick={handleToggleSidebar}> &times; </a>
                 <img src={logo} alt="logo" className="logo"></img>
                 <ul className="admin_option">
-                    <li><Link to="list-students">List Students</Link></li>
+                    <li onClick={() => { handleOptions(1) }}>Enroll in class</li>
 
-                    <li><Link to="add_classes">Add Classes</Link></li>
+                    <li onClick={() => { handleOptions(2) }}>View Files</li>
 
-                    <li><Link to="upload-files">Upload Files</Link></li>
-
-                    <li><Link to="withdrawal-forms">Withdrawal Forms</Link></li>
+                    <li>Apply for Withdrawal</li>
                 </ul>
             </div>
             <div className="main-content">
                 <a className="open-button" onClick={handleToggleSidebar}>&#9776;</a>
-                <ListStudents />
+                <div>{selectedoption} </div>
             </div>
         </div>
     );
 }
 
 export default AdminSidebar;
-

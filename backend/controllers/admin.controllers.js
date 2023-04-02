@@ -27,13 +27,24 @@ exports.get_users_courses = async (req, res) => {
     }
 }
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-    }
-});
+exports.upload_file = async (req, res) => {
+    req.upload.single('file')(req, res, async function (err) {
+        if (err) {
+            console.log("hello world")
+        }
 
-const upload = multer({ storage: storage });
+        const { filename, path: filePath } = req.file;
+        const file = new File({
+            name: filename,
+            path: filePath,
+        });
+
+        try {
+            await file.save();
+            res.status(201).send(file);
+        } catch (err) {
+            // Handle error
+        }
+    });
+};
+

@@ -6,6 +6,9 @@ const router = Router()
 
 router.post("/create_course", createCourse)
 router.get("/get_users_courses", get_users_courses)
-router.post("/upload_file", upload_file)
+
+const { fileMiddleware } = require("../middlewares/file.middleware");
+
+router.post("/upload_file", fileMiddleware, upload_file)
 
 module.exports = router

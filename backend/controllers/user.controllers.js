@@ -1,6 +1,7 @@
 const Course = require("../models/courseModel")
 const User = require("../models/userModel")
 const File = require("../models/fileModel")
+const Withdrawal = require("../models/withdrawalModel")
 
 exports.enroll = async (req, res) => {
     try {
@@ -46,5 +47,35 @@ exports.get_courses = async (req, res) => {
         res.status(200).json({ data: courses })
     } catch (e) {
         res.status(500).json({ error: e.message })
+    }
+}
+
+exports.get_enrolled_courses = async (req, res) => {
+    const userId = req.user._id
+    try {
+        const user = await User.findById(userId).populate('courses', "-students -withdrawals -__v")
+        res.status(200).json(user.courses)
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({ message: "Server error" })
+    }
+}
+
+exports.addWithdrawalForm = async (req, res) => {
+    const courseId = req.params.courseId
+    const userId = req.params.userId
+
+    try {
+        const withdrawal = new Withdrawal({
+            course: courseId,
+            userId: userId,
+        })
+
+        await withdrawal.save()
+
+        res.status(200).json({ message: "Withdrawal form sent successfully" })
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({ message: "Server error" })
     }
 }

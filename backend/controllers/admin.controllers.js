@@ -34,16 +34,18 @@ exports.upload_file = async (req, res) => {
         }
 
         const { filename, path: filePath } = req.file;
+        const publicPath = `public/${filename}`
+
         const file = new File({
             name: filename,
-            path: filePath,
+            path: publicPath,
         });
 
         try {
             await file.save();
             res.status(201).json(file);
         } catch (err) {
-            // Handle error
+            res.status(500).json({ message: "could not save the file" })
         }
     });
 };

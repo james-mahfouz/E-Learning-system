@@ -1,9 +1,9 @@
 import UserSidebar from "../../Components/UserSidebar"
 
-const AdminPage = () => {
+const UserPage = () => {
     return (
         <UserSidebar />
     )
 }
 
-export default AdminPage
+export default UserPage

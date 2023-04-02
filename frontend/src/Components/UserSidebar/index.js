@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Route, Link, Routes } from "react-router-dom";
-// import AddClasses from "../AddClasses";
-import ListStudents from "../ListStudents";
-// import UploadFiles from "../UploadFiles";
-// import WithdrawalForms from "../WithdrawalForms";
+
 import logo from "../../images/logo.png";
 import "../AdminSidebar/index.css";
+import EnrollClasses from "../EnrollClasses"
 
-const AdminSidebar = () => {
+const UserSidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [selectedoption, setSelctedOption] = useState(<EnrollClasses />);
 
     const handleToggleSidebar = () => {
         if (screenWidth < 768) {
@@ -25,6 +24,12 @@ const AdminSidebar = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // const handleOptions = (option) => {
+    //     if (option == 1) {
+
+    //     }
+    // }
+
 
     return (
         <div className="admin-sidebar">
@@ -32,21 +37,19 @@ const AdminSidebar = () => {
                 <a className="close-button" onClick={handleToggleSidebar}> &times; </a>
                 <img src={logo} alt="logo" className="logo"></img>
                 <ul className="admin_option">
-                    <li><Link to="list-students">List Students</Link></li>
+                    <li>Enroll in class</li>
 
-                    <li><Link to="add_classes">Add Classes</Link></li>
+                    <li>View Files</li>
 
-                    <li><Link to="upload-files">Upload Files</Link></li>
-
-                    <li><Link to="withdrawal-forms">Withdrawal Forms</Link></li>
+                    <li>Apply for Withdrawal</li>
                 </ul>
             </div>
             <div className="main-content">
                 <a className="open-button" onClick={handleToggleSidebar}>&#9776;</a>
-                <ListStudents />
+                <div>{selectedoption} </div>
             </div>
         </div>
     );
 }
 
-export default AdminSidebar;
+export default UserSidebar;

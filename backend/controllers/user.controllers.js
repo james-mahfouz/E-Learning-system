@@ -39,3 +39,12 @@ exports.get_files = async (req, res) => {
         res.status(500).json({ error: err.message })
     }
 };
+
+exports.get_courses = async (req, res) => {
+    try {
+        const courses = await Course.find({}, { _id: 1, name: 1 });
+        res.status(200).json({ data: courses })
+    } catch (e) {
+        res.status(500).json({ error: e.message })
+    }
+}

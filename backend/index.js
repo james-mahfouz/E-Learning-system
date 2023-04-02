@@ -1,11 +1,14 @@
 const express = require('express');
 const cluster = require("cluster");
 const OS = require("os")
-const app = express()
+const cors = require('cors');
 require("dotenv").config();
+const path = require('path');
+
+const app = express()
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-const path = require('path');
 app.use('/public', express.static(path.join(__dirname, 'uploads')));
 
 const authRouter = require("./routes/auth.routes")

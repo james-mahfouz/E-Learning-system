@@ -5,6 +5,7 @@ import './App.css';
 import LoginPage from './Pages/LoginPage';
 import RegisterPage from './Pages/RegisterPage';
 import AdminPage from './Pages/AdminPage';
+import UserPage from './Pages/UserPage';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <Router >
       <div className="body">
         <Routes>
+          <Route path="/user" element={<UserPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />

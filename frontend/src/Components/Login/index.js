@@ -11,24 +11,27 @@ import logo from "../../images/logo.png";
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const data = new FormData()
-        data.append('email', email)
-        data.append('password', password)
-        console.log(data, email, password)
+        // const data = new FormData()
+        // data.append('email', email)
+        // data.append('password', password)
+        // console.log(email, password)
 
-        //     try {
-        //         const response = await axios.post('http://localhost:8000/api/v1/auth/login', data);
-        //         if(response.data.status === "success"){
-        //             localStorage.setItem('token', response.data.authorisation.token);
-        //             navigate("/landing")
-        //         }
-        //     } catch (error) {
-        //         console.log(error);
-        //     }
+        try {
+            const response = await axios.post('http://localhost:4000/auth/login', {
+                "email": email,
+                "password": password
+            })
+            localStorage.setItem('token', response.data.token);
+            navigate("/user")
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Button } from 'primereact/button';
+import { Column } from 'primereact/column';
 
 const ViewFiles = () => {
     const [files, setFiles] = useState([]);
@@ -48,22 +51,15 @@ const ViewFiles = () => {
 
     return (
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course ID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {files.map((file) => (
-                        <tr key={file.name}>
-                            <td>{file.name}</td>
-                            <td><button onClick={() => handleView(file.name)}>View File</button></td>
-                            <td><button onClick={() => handleDownload(file.name)}>Download File</button></td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <DataTable value={files} className="p-datatable-striped">
+                <Column field="name" header="Course ID" />
+                <Column header="" body={(rowData) => (
+                    <Button label="View File" icon="pi pi-eye" onClick={() => handleView(rowData.name)} />
+                )} />
+                <Column header="" body={(rowData) => (
+                    <Button label="Download File" icon="pi pi-cloud-download" onClick={() => handleDownload(rowData.name)} />
+                )} />
+            </DataTable>
         </div >
     );
 };

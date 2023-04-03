@@ -4,7 +4,7 @@ import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import axios from 'axios';
 
-const WithdrawalForms = () => {
+const WithdrawalForm = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -13,6 +13,7 @@ const WithdrawalForms = () => {
                 const response = await axios.get('http://localhost:4000/user/get_enrolled_courses', {
                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                 });
+                console.log(response.data)
                 setData(response.data);
             } catch (e) {
                 console.log(e.message);
@@ -26,7 +27,6 @@ const WithdrawalForms = () => {
             const response = await axios.post(`http://localhost:4000/user/addWithdrawalForm/${id}`, null, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             })
-            console.log(response.data);
         } catch (e) {
             console.log(e)
         }
@@ -44,4 +44,4 @@ const WithdrawalForms = () => {
     );
 }
 
-export default WithdrawalForms;
+export default WithdrawalForm;

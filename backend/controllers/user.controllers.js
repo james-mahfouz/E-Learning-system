@@ -64,7 +64,11 @@ exports.get_enrolled_courses = async (req, res) => {
 exports.addWithdrawalForm = async (req, res) => {
     const courseId = req.params.courseId
     const userId = req.user._id
-    console.log(userId)
+    const existingWithdrawal = await Withdrawal.findOne({ user: userId, course: courseId })
+    if (existingWithdrawal) {
+        return res.status(400).json({ message: "A withdrawal form for this course has already been submitted" })
+    }
+
     try {
         const withdrawal = new Withdrawal({
             course: courseId,

@@ -1,5 +1,7 @@
 const Course = require("../models/courseModel")
 const File = require("../models/fileModel")
+const Withdrawal = require("../models/withdrawalModel")
+const User = require("../models/userModel")
 
 exports.createCourse = async (req, res) => {
     const { name } = req.body
@@ -50,3 +52,55 @@ exports.upload_file = async (req, res) => {
     });
 };
 
+exports.get_withdrawal = async (req, res) => {
+    try {
+        const withdrawal = await Withdrawal.find({ status: "pending" }).populate({
+            path: 'user',
+            select: '-role -password -courses'
+        }).populate({
+            path: "course",
+            select: '-students -withdrawals'
+        })
+
+        console.log("quitting")
+        console.log(withdrawal)
+        res.status(200).json(withdrawal)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+exports.approve_withdrawal = async (req, res) => {
+    const { user_id, course_id, withdrawal_id } = req.body;
+
+    try {
+        const withdrawal = await Withdrawal.findByIdAndUpdate(
+            withdrawal_id,
+            { status: 'approved' },
+            { new: true }
+        );
+
+        const user = await User.findByIdAndUpdate(
+            user_id,
+            { $pull: { courses: course_id } },
+            { new: true }
+        );
+
+        const course = await Course.findByIdAndUpdate(
+            course_id,
+            { $pull: { students: user_id } },
+            { new: true }
+        );
+
+        res.status(200).json({
+            message: 'Withdrawal approved and course removed from user and student removed from course',
+            withdrawal,
+            user,
+            course,
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+}

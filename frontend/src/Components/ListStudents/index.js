@@ -2,9 +2,12 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const ListStudents = () => {
     const [students, setStudents] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getFiles = async () => {
@@ -16,6 +19,7 @@ const ListStudents = () => {
                 console.log(response.data.data.courses);
             } catch (e) {
                 console.log(e.message);
+                navigate("/")
             }
         };
         getFiles();

@@ -19,7 +19,7 @@ const Login = () => {
                 "password": password
             })
             localStorage.setItem('token', response.data.token);
-            navigate("/user")
+            navigate("/")
 
         } catch (error) {
             console.log(error);

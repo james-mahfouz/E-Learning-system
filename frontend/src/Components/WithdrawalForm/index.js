@@ -13,7 +13,7 @@ const WithdrawalForm = () => {
                 const response = await axios.get('http://localhost:4000/user/get_enrolled_courses', {
                     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                 });
-                console.log(response.data)
+
                 setData(response.data);
             } catch (e) {
                 console.log(e.message);

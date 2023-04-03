@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Button } from 'primereact/button';
+import { Column } from 'primereact/column';
 
 const EnrollClasses = () => {
     const [courses, setCourses] = useState([]);
@@ -33,24 +36,13 @@ const EnrollClasses = () => {
 
     return (
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course ID</th>
-                        <th>Course Name</th>
-                        <th>Enroll</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {courses.map((course) => (
-                        <tr key={course._id}>
-                            <td>{course._id}</td>
-                            <td>{course.name}</td>
-                            <td><button onClick={() => handleEnroll(course._id)}>Enroll</button></td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <DataTable value={courses} className="p-datatable-striped">
+                <Column field="_id" header="Course ID" />
+                <Column field="name" header="Course Name" />
+                <Column header="Enroll" body={(rowData) => (
+                    <Button label="Enroll" icon="pi pi-check" onClick={() => handleEnroll(rowData._id)} />
+                )} />
+            </DataTable>
         </div>
     );
 };

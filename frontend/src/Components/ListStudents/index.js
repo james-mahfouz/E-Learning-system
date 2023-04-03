@@ -30,7 +30,7 @@ const ListStudents = () => {
         <div className="">
             {students.map((course) => (
                 <div key={course.name}>
-                    <h3>{course.name}</h3>
+                    <h3>{course.name.toUpperCase()}</h3>
                     <DataTable tableStyle={{ minWidth: '50%' }} value={course.students}>
                         <Column field="_id" header="Code"></Column>
                         <Column field="name" header="Name"></Column>

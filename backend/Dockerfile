@@ -1,7 +1,5 @@
 FROM node:latest
 
-WORKDIR /usr/src/index
-
 COPY package*.json ./
 
 RUN npm install

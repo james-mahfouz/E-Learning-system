@@ -32,7 +32,6 @@ const UploadFiles = () => {
                 name="demo[]"
                 customUpload={true}
                 uploadHandler={onUpload}
-                // disabled={true}
                 multiple
                 accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 maxFileSize={100000000000000}

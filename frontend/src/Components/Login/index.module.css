@@ -1,0 +1,76 @@
+.signinWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #0C1D36;
+    height: 100vh;
+}
+
+.signinLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signinLogo img {
+    width: 50%;
+    margin-top: 40px;
+}
+
+.wrapper {
+    max-width: 500px;
+    width: 100%;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form {
+    width: 100%;
+}
+
+.inputField {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.inputField label {
+    width: 200px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.inputField .p-inputtext {
+    width: 100%;
+    outline: none;
+    border: 1px solid #d5dbd9;
+    background-color: #FAFAFA;
+    font-size: 15px;
+    padding: 8px 10px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.inputField .p-button {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
+    border: 0px;
+    background: #F9CC0B;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+}
